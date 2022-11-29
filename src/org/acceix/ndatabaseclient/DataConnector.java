@@ -161,7 +161,7 @@ public final class DataConnector {
                                 }
 
 
-                                String connectionString = "jdbc:mariadb://" + envs.get("database_host") + ":" + envs.get("database_port") + "/" + envs.get("database_schema") + "?user=" + envs.get("database_user") + "&password=" + envs.get("database_password")  +  "&useUnicode=yes;characterEncoding=utf16";// "&minPoolSize=20&maxPoolSize=1000&maxIdleTime=80&pool"
+                                String connectionString = "jdbc:mariadb://" + envs.get("database_host") + ":" + envs.get("database_port") + "/" + envs.get("database_schema") + "?user=" + envs.get("database_user") + "&password=" + envs.get("database_password")  +  "&useUnicode=yes;characterEncoding=UTF-8";// "&minPoolSize=20&maxPoolSize=1000&maxIdleTime=80&pool"
                                 
                                 try {
                                     connection = DriverManager.getConnection(connectionString);

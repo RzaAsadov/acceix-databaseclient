@@ -96,6 +96,27 @@ public class DataSelectable {
             
         }
         
+        public DataSelectable joinTable(String tableName,String idFieldOnLocalTable,String idFieldOnJoinedTable,Object noChoiceValueForMainTable) {
+            
+            Map<Integer,Object> data = new HashMap<>();
+            data.put(DataComparable.COLUMN, ndataTable.getFirstTable() + "." + idFieldOnLocalTable);
+                        
+            joinedONColumns.put(tableName + "." + idFieldOnJoinedTable, data);
+            
+            //////////////////////////// for no choice option ////////////////////////////
+            
+            Map<Integer,Object> dataForNoChoice = new HashMap<>();
+            dataForNoChoice.put(DataComparable.EQUAL, Integer.valueOf(0));
+                        
+            joinedONColumns.put(ndataTable.getFirstTable() + "." + idFieldOnLocalTable, dataForNoChoice); 
+            
+            //////////////////////////////////////////////////////////////////////////////
+            
+            ndataTable.joinTable(tableName);
+            return this;
+            
+        }        
+        
         public DataSelectable endJoin() {
             ndataTable.endJoin();
             return this;
@@ -173,6 +194,8 @@ public class DataSelectable {
                 
                 columnsToCompare.putAll(joinedONColumns);
                 
+
+                
                 if (!columnsToCompare.isEmpty()) {
                 
                                 selectStringBuilder.append(" WHERE ");
@@ -182,31 +205,37 @@ public class DataSelectable {
 
                                     entryValue.entrySet().forEach((element) -> {
 
-                                            if (null!=element.getKey()) switch (element.getKey()) {
-                                            case DataComparable.EQUAL:
-                                                compareListJoiner.add(entry.getKey() + " = ?");
-                                                break;
-                                            case DataComparable.NOTEQUAL:
-                                                compareListJoiner.add(entry.getKey() + " != ?");
-                                                break;                                                
-                                            case DataComparable.GREATER:
-                                                compareListJoiner.add(entry.getKey() + " > ?");
-                                                break;
-                                            case DataComparable.GREATEROREQUAL:
-                                                compareListJoiner.add(entry.getKey() + " >= ?");
-                                                break;
-                                            case DataComparable.LOWER:
-                                                compareListJoiner.add(entry.getKey() + " < ?");
-                                                break;
-                                            case DataComparable.LOWEROREQUAL:
-                                                compareListJoiner.add(entry.getKey() + " <= ?");
-                                                break;
-                                            case DataComparable.COLUMN:
-                                                compareListJoiner.add(entry.getKey() + " = " + entry.getValue().get(DataComparable.COLUMN));
-                                                break;                                                
-                                            default:
-                                                break;
-                                            }
+                                         if (null!=element.getKey()) {
+                                             
+                                                switch (element.getKey()) {
+                                                    
+                                                   case DataComparable.EQUAL:
+                                                       compareListJoiner.add(entry.getKey() + " = ?");
+                                                       break;
+                                                   case DataComparable.NOTEQUAL:
+                                                       compareListJoiner.add(entry.getKey() + " != ?");
+                                                       break;                                                
+                                                   case DataComparable.GREATER:
+                                                       compareListJoiner.add(entry.getKey() + " > ?");
+                                                       break;
+                                                   case DataComparable.GREATEROREQUAL:
+                                                       compareListJoiner.add(entry.getKey() + " >= ?");
+                                                       break;
+                                                   case DataComparable.LOWER:
+                                                       compareListJoiner.add(entry.getKey() + " < ?");
+                                                       break;
+                                                   case DataComparable.LOWEROREQUAL:
+                                                       compareListJoiner.add(entry.getKey() + " <= ?");
+                                                       break;
+                                                   case DataComparable.COLUMN:
+                                                       compareListJoiner.add(entry.getKey() + " = " + entry.getValue().get(DataComparable.COLUMN));
+                                                       break;                                                
+                                                   default:
+                                                       break;
+                                                       
+                                                }
+                                                
+                                         }
 
                                      });
 
