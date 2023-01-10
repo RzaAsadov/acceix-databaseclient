@@ -93,6 +93,9 @@ public class DataTypes {
                     case "int":
                         return DataTypes.TYPE_INT;
                         
+                    case "integer":
+                        return DataTypes.TYPE_INT;                        
+                        
                     case "int unsigned":
                         return DataTypes.TYPE_INT;
 

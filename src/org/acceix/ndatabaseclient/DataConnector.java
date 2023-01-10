@@ -119,7 +119,7 @@ public final class DataConnector {
                         } else {
                             dbtype = UNKNOWN_DB;
                             throw new UnknownError("Unknown database type");
-                        }                    
+                        }
                     return connection;
                     
                 }
