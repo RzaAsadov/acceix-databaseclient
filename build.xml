@@ -7,8 +7,8 @@
 <!-- the Compile on Save feature is turned off for the project. -->
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
-<project name="acceix-databaseclient" default="default" basedir=".">
-    <description>Builds, tests, and runs the project acceix-databaseclient.</description>
+<project name="mdatabaseclient" default="default" basedir=".">
+    <description>Builds, tests, and runs the project mdatabaseclient.</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -72,5 +72,9 @@
     -->
 	
 	
+<!--target name="-post-jar">
+    <echo>Copying over extra jars into PROJECT MAIN</echo>
+        <copy file="./dist/mdatabaseclient.jar" todir="../netondofrontend/libexec"/>
+</target-->		
 	
 </project>
